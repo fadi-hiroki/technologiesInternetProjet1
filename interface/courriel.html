@@ -6,9 +6,9 @@
 <body>
         <div id="mySidenav" class="sidenav">
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                <a href="#">Inbox</a>
-                <a href="#">Send</a>
-                <a href="#">Contacts</a>
+                <span onclick="route('inbox')"><a href="#">Inbox</a></span>
+                <span onclick="route('send')"><a href="#">Send</a></span>
+                <span onclick="route('contacts')"></span><a href="#">Contacts</a></span>
               </div>
               
               <!-- Use any element to open the sidenav -->
@@ -17,6 +17,9 @@
               <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
               <div id="main">
                 <div id="inbox">
+                    <div class="searchForm">
+                        <div><input type="text" name="search" placeholder="search..."></div>
+                    </div>
                     <table>
                         <th>Sent by</th><th>Content</th>
                         <tr><td>Placeholder sender</td><td>Placeholder content</td></tr>
