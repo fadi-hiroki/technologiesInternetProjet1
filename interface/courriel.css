@@ -70,3 +70,13 @@
       border-width: 1px;;
   }
 
+  /* send */
+  #send {
+    display: none;
+  }
+
+  /* contacts */
+  #contacts {
+    display: none;
+  }
+

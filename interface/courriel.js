@@ -16,7 +16,7 @@ function openNav() {
     var elementIDs = ["inbox", "send","contacts"]
     console.log(target)
     elementIDs.forEach(element => {
-        document.getElementById(element).style.visible = "0";
+        document.getElementById(element).style.display = "none";
     })
-    document.getElementById(target).style.visible = "1";
+    document.getElementById(target).style.display = "block";
   } 
