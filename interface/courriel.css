@@ -80,3 +80,8 @@
     display: none;
   }
 
+  .navbarToggle img {
+    width: 2rem;
+    margin: 2rem;
+  }
+
