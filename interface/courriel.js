@@ -1,7 +1,13 @@
 var inboxVariables = {
-  mail : [mail('max@gmail.com','max has answered your question on kijiji.'), mail('spam@gmail.com','Make 100 000$ a day with this simple trick'), mail('uqo@gmail.com','Make 100 000$ a day with this simple trick')],
-  displayedMail : mail
+  mail : [],
 }
+
+window.onload = function setup() {
+  inboxVariables.mail = [mail('max@gmail.com','max has answered your question on kijiji.'), mail('spam@gmail.com','Make 100 000$ a day with this simple trick'), mail('uqo@gmail.com','Make 100 000$ a day with this simple trick')];
+  searchMail('');
+}
+
+
 
 /* Set the width of the side navigation to 250px and the left margin of the page content to 250px and add a black background color to body */
 function openNav() {
@@ -27,20 +33,19 @@ function openNav() {
   } 
 
   function searchMail(value) {
-    console.log(inboxVariables.mail[0].sender)
-    inboxVariables.displayedMail = [];
+    var displayedMail = [];
     var result = "<caption>Courrier</caption><tr><th>Sent by</th><th>Content</th></tr>";
     inboxVariables.mail.forEach(element => {
-      if (element.sender.includes(value) || element.content.includes(value)) {
-        inboxVariables.displayedMail.push(element);
+      if (element.sender.toLowerCase().includes(value.toLowerCase()) || element.content.toLowerCase().includes(value.toLowerCase())) {
+        displayedMail.push(element);
       }
     })
   
-    inboxVariables.displayedMail.forEach( element => {
+    displayedMail.forEach( element => {
       result += ('<tr><td>' + element.sender + '</td><td>' + element.content + '</td></tr>');
     })
 
-    if(!inboxVariables.displayedMail) {
+    if(!displayedMail) {
       result += "<tr text-alight: 'center'>no results...</tr>";
     }
 

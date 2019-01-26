@@ -17,7 +17,7 @@
               <div id="main">
                 <div id="inbox">
                     <div class="searchForm">
-                        <input type="text" name="search" placeholder="search..." onChange="searchMail(this.value);">
+                        <input type="text" name="search" placeholder="search..." onkeyup="searchMail(this.value);" autocomplete="off">
                     </div>
                     <div>
                         <table id="displayedMail" style="width:100%">
