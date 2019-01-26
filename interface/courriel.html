@@ -18,20 +18,19 @@
               <div id="main">
                 <div id="inbox">
                     <div class="searchForm">
-                        <div><input type="text" name="search" placeholder="search..."></div>
+                        <input type="text" name="search" placeholder="search..." onChange="searchMail(this.value);">
                     </div>
-                    <table>
-                        <th>Sent by</th><th>Content</th>
-                        <tr><td>Placeholder sender</td><td>Placeholder content</td></tr>
-                        <tr><td>Placeholder sender1</td><td>Placeholder content1</td></tr>
-                        <tr><td>Placeholder sender2</td><td>Placeholder content2</td></tr>
-                    </table>
+                    <div>
+                        <table id="displayedMail" style="width:100%">
+                        </table>
+                    </div>
                 </div>
                 <div id="send">
                     f
-                    </div>
+                </div>
                 <div id="contacts">
                     d
-                    </div>
+                </div>
+            </div>
               </div> 
 </body>
