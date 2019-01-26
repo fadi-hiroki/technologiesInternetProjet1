@@ -3,8 +3,12 @@ var inboxVariables = {
 }
 
 window.onload = function setup() {
-  inboxVariables.mail = [mail('max@gmail.com','max has answered your question on kijiji.'), mail('spam@gmail.com','Make 100 000$ a day with this simple trick'), mail('uqo@gmail.com','Make 100 000$ a day with this simple trick')];
+  inboxVariables.mail = getMail();
   searchMail('');
+}
+
+function getMail() {
+  return [mail('max@gmail.com','max has answered your question on kijiji.'), mail('spam@gmail.com','Make 100 000$ a day with this simple trick'), mail('uqo@gmail.com','Make 100 000$ a day with this simple trick')];
 }
 
 
