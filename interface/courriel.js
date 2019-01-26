@@ -11,6 +11,14 @@ function getMail() {
   return [mail('max@gmail.com','max has answered your question on kijiji.'), mail('spam@gmail.com','Make 100 000$ a day with this simple trick'), mail('uqo@gmail.com','Make 100 000$ a day with this simple trick')];
 }
 
+function sendMail() {
+  var contact = document.getElementById('sendContact').value;
+  var content = document.getElementById('sendContent').value;
+  console.log(mail(contact, content));
+  document.getElementById('sendContact').value = '';
+  document.getElementById('sendContent').value = '';
+}
+
 
 
 /* Set the width of the side navigation to 250px and the left margin of the page content to 250px and add a black background color to body */
@@ -29,7 +37,6 @@ function openNav() {
 
   function route(target) {
     var elementIDs = ["inbox", "send","contacts"]
-    console.log(target)
     elementIDs.forEach(element => {
         document.getElementById(element).style.display = "none";
     })
