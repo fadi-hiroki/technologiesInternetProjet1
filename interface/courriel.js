@@ -1,14 +1,21 @@
-var inboxVariables = {
+var globalVariables = {
   mail : [],
+  contacts : []
 }
 
 window.onload = function setup() {
-  inboxVariables.mail = getMail();
+  globalVariables.mail = getMail();
   searchMail('');
+  globalVariables.contacts = getContacts();
+  searchContacts('');
 }
 
 function getMail() {
   return [mail('max@gmail.com','max has answered your question on kijiji.'), mail('spam@gmail.com','Make 100 000$ a day with this simple trick'), mail('uqo@gmail.com','Make 100 000$ a day with this simple trick')];
+}
+
+function getContacts() {
+  return ['max@gmail.com', 'spam@gmail.com', 'uqo@gmail.com'];
 }
 
 function sendMail() {
@@ -46,7 +53,7 @@ function openNav() {
   function searchMail(value) {
     var displayedMail = [];
     var result = "<caption>Courrier</caption><tr><th>Sent by</th><th>Content</th></tr>";
-    inboxVariables.mail.forEach(element => {
+    globalVariables.mail.forEach(element => {
       if (element.sender.toLowerCase().includes(value.toLowerCase()) || element.content.toLowerCase().includes(value.toLowerCase())) {
         displayedMail.push(element);
       }
@@ -61,6 +68,26 @@ function openNav() {
     }
 
     document.getElementById('displayedMail').innerHTML = result;
+  }
+
+  function searchContacts(value) {
+    var displayedContacts = [];
+    var result = "<caption>Contacts</caption>";
+    globalVariables.contacts.forEach(element => {
+      if (element.toLowerCase().includes(value.toLowerCase())) {
+        displayedContacts.push(element);
+      }
+    })
+  
+    displayedContacts.forEach( element => {
+      result += ('<tr><td>' + element + '</td></tr>');
+    })
+
+    if(!displayedContacts) {
+      result += "<tr text-alight: 'center'>no results...</tr>";
+    }
+
+    document.getElementById('displayedContacts').innerHTML = result;
   }
   
   function mail(sender, content) {

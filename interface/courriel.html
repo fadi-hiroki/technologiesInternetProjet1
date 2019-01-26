@@ -30,8 +30,13 @@
                         <button type="button" onclick="sendMail();">Send</button>
                 </div>
                 <div id="contacts">
-                    d
+                    <div class="searchForm">
+                            <input type="text" name="search" placeholder="search..." onkeyup="searchContacts(this.value);" autocomplete="off">
+                        </div>
+                        <div>
+                            <table id="displayedContacts" style="width:100%">
+                            </table>
+                    </div>
                 </div>
             </div>
-              </div> 
 </body>
