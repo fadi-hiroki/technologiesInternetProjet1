@@ -12,8 +12,11 @@ function openNav() {
     document.body.style.backgroundColor = "white";
   } 
 
-//   function route(target) {
-//     document.getElementById(target).style.visible = "0";
-//     document.getElementById("main").style.marginLeft = "0";
-//     document.body.style.backgroundColor = "white";
-//   } 
+  function route(target) {
+    var elementIDs = ["inbox", "send","contacts"]
+    console.log(target)
+    elementIDs.forEach(element => {
+        document.getElementById(element).style.visible = "0";
+    })
+    document.getElementById(target).style.visible = "1";
+  } 
