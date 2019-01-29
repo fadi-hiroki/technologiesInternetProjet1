@@ -14,7 +14,6 @@
     height: 100%; 
     width: 0; 
     position: fixed; 
-    z-index: 1; Stay on top
     top: 0; 
     left: 0;
     background-color: #111; 
@@ -50,8 +49,11 @@
   }
 
   #main {
-    transition: margin-left .5s;
+    transition: .5s;
     padding: 20px;
+    background-color: rgba(255, 255, 255, 0.3);
+    width: 75%;
+    margin: 3% 10%;
   }
   
 
@@ -77,6 +79,10 @@
   }
 
   /* general */
+  body {
+      background-image: url("./images/generic-background.jpg");
+  }
+
   input {
       border-color: black;
       border-style: solid;

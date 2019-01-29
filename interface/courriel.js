@@ -21,28 +21,23 @@ function getContacts() {
 function sendMail() {
   var contact = document.getElementById('sendContact').value;
   var content = document.getElementById('sendContent').value;
-  console.log(mail(contact, content));
   document.getElementById('sendContact').value = '';
   document.getElementById('sendContent').value = '';
 }
 
 
 
-/* Set the width of the side navigation to 250px and the left margin of the page content to 250px and add a black background color to body */
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
-    document.getElementById("main").style.marginLeft = "250px";
-    document.body.style.backgroundColor = "rgba(0,0,0,0.1)";
+    document.getElementById("main").style.marginLeft = "300px";
   }
   
-  /* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
-  function closeNav() {
+function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("main").style.marginLeft = "0";
-    document.body.style.backgroundColor = "white";
+    document.getElementById("main").style.margin = "3% 10%";
   } 
 
-  function route(target) {
+function route(target) {
     var elementIDs = ["inbox", "send","contacts"]
     elementIDs.forEach(element => {
         document.getElementById(element).style.display = "none";
@@ -50,7 +45,7 @@ function openNav() {
     document.getElementById(target).style.display = "block";
   } 
 
-  function searchMail(value) {
+function searchMail(value) {
     var displayedMail = [];
     var result = "<caption>Courrier</caption><tr><th>Sent by</th><th>Content</th></tr>";
     globalVariables.mail.forEach(element => {
@@ -70,7 +65,7 @@ function openNav() {
     document.getElementById('displayedMail').innerHTML = result;
   }
 
-  function searchContacts(value) {
+function searchContacts(value) {
     var displayedContacts = [];
     var result = "<caption>Contacts</caption>";
     globalVariables.contacts.forEach(element => {
@@ -90,6 +85,6 @@ function openNav() {
     document.getElementById('displayedContacts').innerHTML = result;
   }
   
-  function mail(sender, content) {
+function mail(sender, content) {
     return ({sender: sender, content: content});
   }
