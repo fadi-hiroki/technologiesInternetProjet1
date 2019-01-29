@@ -16,6 +16,7 @@
     position: fixed; 
     top: 0; 
     left: 0;
+    z-index: 1;
     background-color: #111; 
     overflow-x: hidden; 
     padding-top: 60px; 
@@ -44,8 +45,12 @@
   }
 
   .navbarToggle img {
-    width: 2rem;
-    margin: 2rem;
+    width: 2.5rem;
+    margin: 2.5rem;
+  }
+
+  .navbarToggle img:hover {
+    filter: invert(95%);
   }
 
   #main {
