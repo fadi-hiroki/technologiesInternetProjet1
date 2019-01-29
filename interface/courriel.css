@@ -54,6 +54,7 @@
     background-color: rgba(255, 255, 255, 0.3);
     width: 75%;
     margin: 3% 10%;
+    font-family: "Courier New";
   }
   
 
@@ -64,7 +65,7 @@
   } 
 
   /* inbox */
-  #inbox th{
+  #inbox th {
       text-align: left;
   }
 
@@ -83,8 +84,46 @@
       background-image: url("./images/generic-background.jpg");
   }
 
-  input {
-      border-color: black;
+  .input {
+      border-color: rgba(0, 0, 0, 0.1);
+      margin: 15px;
+      padding: 3 10px;
+      border-radius: 15px;
       border-style: solid;
-      border-width: 1px;;
+      border-width: 2px;
   }
+
+  table {
+    padding: 3px 5%;
+  }
+
+  .caption {
+    text-transform: uppercase;
+    text-decoration: underline;
+    letter-spacing: 2px;
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 2rem;
+  }
+
+  table th {
+    padding: 4px 0;
+    color: rgba(0, 0, 0, 0.651);
+  }
+
+  table td {
+    padding: 4px 0;
+  }
+
+  #sendContent {
+    min-width: 98%;
+    min-height: 15rem;
+    padding: 1rem 1rem;
+  }
+
+  .subTitle {
+    padding: 4px 0;
+    color: rgba(0, 0, 0, 0.699);
+  }
+
+

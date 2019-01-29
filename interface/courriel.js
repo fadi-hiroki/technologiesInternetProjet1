@@ -47,7 +47,7 @@ function route(target) {
 
 function searchMail(value) {
     var displayedMail = [];
-    var result = "<caption>Courrier</caption><tr><th>Sent by</th><th>Content</th></tr>";
+    var result = "<caption class='caption'>Mail</caption><tr><th>Sent by</th><th>Content</th></tr>";
     globalVariables.mail.forEach(element => {
       if (element.sender.toLowerCase().includes(value.toLowerCase()) || element.content.toLowerCase().includes(value.toLowerCase())) {
         displayedMail.push(element);
@@ -67,7 +67,7 @@ function searchMail(value) {
 
 function searchContacts(value) {
     var displayedContacts = [];
-    var result = "<caption>Contacts</caption>";
+    var result = "<caption class='caption'>Contacts</caption>";
     globalVariables.contacts.forEach(element => {
       if (element.toLowerCase().includes(value.toLowerCase())) {
         displayedContacts.push(element);
