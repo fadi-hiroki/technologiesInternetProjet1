@@ -15,7 +15,7 @@ function getMail() {
 }
 
 function getContacts() {
-  return ['max@gmail.com', 'spam@gmail.com', 'uqo@gmail.com'];
+  return [contact("Placeholder1", "John Smith"), contact("Placeholder2", "Pierre Tremblay"), contact("Placeholder3", "Jean Coutu")];
 }
 
 function sendMail() {
@@ -67,15 +67,15 @@ function searchMail(value) {
 
 function searchContacts(value) {
     var displayedContacts = [];
-    var result = "<caption class='caption'>Contacts</caption>";
+    var result = "<caption class='caption'>Contacts</caption><tr><th>Key</th><th>Name</th></tr>";
     globalVariables.contacts.forEach(element => {
-      if (element.toLowerCase().includes(value.toLowerCase())) {
+if (element.key.toLowerCase().includes(value.toLowerCase())||element.name .toLowerCase().includes(value.toLowerCase())) {
         displayedContacts.push(element);
       }
     })
   
     displayedContacts.forEach( element => {
-      result += ('<tr><td>' + element + '</td></tr>');
+      result += ('<tr><td>' + element.key + '</td><td>'+element.name+'</td></tr>');
     })
 
     if(!displayedContacts) {
@@ -88,3 +88,7 @@ function searchContacts(value) {
 function mail(sender, content) {
     return ({sender: sender, content: content});
   }
+  
+function contact(key, name){
+	return ({key: key, name: name});
+}
