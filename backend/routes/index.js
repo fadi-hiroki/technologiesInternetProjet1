@@ -8,10 +8,11 @@ router.get('/', function(req, res, next) {
 
 /* GET mail. */
 router.get('/getLetters', function(req, res, next) {
+  ret = ["test", "patate"];
   if(req.params.pem) {
-    console.log("il avait des params")
-    return JSON.stringify(["test", "ceci"]);
+    console.log(req.params.pem);
   }
+  res.write(JSON.stringify(ret));
   next();
 });
 
