@@ -16,7 +16,12 @@ router.get('/getLetters', function(req, res, next) {
   if (pemRegex.test(req.query.pem)) {
     let RawLetters = fs.readFileSync(path.resolve(__dirname, '../public/database/messages.json'));  
     let letters = JSON.parse(RawLetters); 
-    ret = letters.messages.map(a => a.dest == req.query.pem);
+    letters.messages.forEach(function (letter) {
+      if(letter.dest == req.query.pem) {
+        ret.push(letter);
+      }
+    })
+
     res.json(ret);
   } else {
     res.status(400).send('Invalid pem!');
