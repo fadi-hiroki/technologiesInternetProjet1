@@ -1,0 +1,16 @@
+{
+	"messages":[
+		{
+			"publicKey":"Placeholder1",
+			"name":"John Smith"
+		},
+		{
+			"publicKey":"Placeholder2",
+			"name":"Pierre Tremblay"
+		},
+		{
+			"publicKey":"Placeholder3",
+			"name":"Jean Coutu"
+		}
+	]
+}
