@@ -12,8 +12,10 @@ router.get('/getLetters', function(req, res, next) {
 
   ret = ["test", "patate"];
 
-  if(re2.test(req.query.pem)) {
+  if (pemRegex.test(req.query.pem)) {
     res.json(ret);
+  } else {
+    res.status(400).send('Invalid pem!');
   }
 });
 
