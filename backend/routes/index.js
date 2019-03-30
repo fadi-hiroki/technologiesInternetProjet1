@@ -8,12 +8,13 @@ router.get('/', function(req, res, next) {
 
 /* GET mail. */
 router.get('/getLetters', function(req, res, next) {
+  var pemRegex = new RegExp("-----BEGIN PUBLIC KEY-----(.|\n|\r)*-----END PUBLIC KEY-----\r?\n?$");
+
   ret = ["test", "patate"];
-  if(req.params.pem) {
-    console.log(req.params.pem);
+
+  if(re2.test(req.query.pem)) {
+    res.json(ret);
   }
-  res.write(JSON.stringify(ret));
-  next();
 });
 
 module.exports = router;
