@@ -21,7 +21,6 @@ router.get('/getLetters', function(req, res, next) {
         ret.push(letter);
       }
     })
-
     res.json(ret);
   } else {
     res.status(400).send('Invalid pem!');
