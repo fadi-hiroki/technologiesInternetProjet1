@@ -1,0 +1,16 @@
+{
+	"messages":[
+		{
+			"publicKey":"Placeholder1",
+			"content":"A encrypter."
+		},
+		{
+			"publicKey":"Placeholder2",
+			"content":"Aussi à encrypter."
+		},
+		{
+			"publicKey":"Placeholder3",
+			"content":"Je manque d'idées"
+		}
+	]
+}

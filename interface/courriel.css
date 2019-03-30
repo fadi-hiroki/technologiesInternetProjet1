@@ -120,6 +120,10 @@
     padding: 4px 0;
   }
 
+  #contacts th {
+      text-align: left;
+  }
+  
   #sendContent {
     min-width: 98%;
     min-height: 15rem;
