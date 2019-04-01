@@ -15,10 +15,10 @@ router.get('/getLetters', function(req, res, next) {
   let ret = [];
 
   if (!validations.validPEM(req.query.pem)){
-    res.status(400).send('Invalid pem!');
+    res.sendStatus(400);
   } else {
     let letters = database.getLetters();
-    letters.messages.forEach(function (letter) {
+    letters.forEach(function (letter) {
       if(letter.dest == req.query.pem) {
         ret.push(letter);
       }
@@ -29,18 +29,17 @@ router.get('/getLetters', function(req, res, next) {
 
 /* POST mail. */
 router.post('/addLetters', function(req, res, next) {
+  let letters = database.getLetters();
   let letter;
-
-  if (!validations.validPEM(req.query.dest.pem)){
-    res.status(400).send('Invalid pem!');
-  } else {
-    let letters = database.getLetters();
-    letter = {
-      dest: req.query.dest.pem,
-      msg: req.query.dest.msg
+  JSON.parse(req.query.letters).forEach(function (letter) {
+    if(newLetter = database.letter(letter)) {
+      letters.push(newLetter);
+    } else {
+      res.sendStatus(400);
     }
-    letters.push(letter);
-  }
+  });
+  database.putLetters(letters);
+  res.sendStatus(200);
 });
 
 module.exports = router;
