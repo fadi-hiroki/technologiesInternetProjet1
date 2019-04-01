@@ -13,13 +13,13 @@ router.get('/', function(req, res, next) {
 /* GET mail. */
 router.get('/getLetters', function(req, res, next) {
   let ret = [];
-
+  let pem = req.query.pem.replace(/\\n/g, '\n');
   if (!validations.validPEM(req.query.pem)){
     res.sendStatus(400);
   } else {
     let letters = database.getLetters();
     letters.forEach(function (letter) {
-      if(letter.dest == req.query.pem) {
+      if(letter.dest == pem) {
         ret.push(letter);
       }
     })
