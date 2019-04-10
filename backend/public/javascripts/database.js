@@ -19,5 +19,8 @@ module.exports = {
     }, 
     putLetters(letters) {
         fs.writeFileSync(path.resolve(__dirname, '../database/messages.json'), JSON.stringify({messages:letters}));
-    }, 
+    },
+    getPeers() {
+        return  JSON.parse(fs.readFileSync(path.resolve(__dirname, '../database/peers.json'))).peers;
+    },  
 }

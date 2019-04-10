@@ -1,5 +1,5 @@
 {
-	"contacts":[
+	"peers":[
 		{
 			"publicKey":"Placeholder1",
 			"name":"John Smith"

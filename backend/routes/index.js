@@ -42,4 +42,9 @@ router.post('/addLetters', function(req, res, next) {
   res.sendStatus(200);
 });
 
+router.get('/getPeers', function(req, res, next) {
+    let peers = database.getPeers();
+    res.json(peers);
+});
+
 module.exports = router;
