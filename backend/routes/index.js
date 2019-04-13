@@ -7,10 +7,13 @@ const database = require("../public/javascripts/database.js");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Hello' });
 });
 
-/* GET mail. */
+/* GET mail.
+@params pem A string representing a valid pem for witch one wishes to receive destined letters.
+@return mail with pem as destinator.
+*/
 router.get('/getLetters', function(req, res, next) {
   let ret = [];
   let pem = req.query.pem.replace(/\\n/g, '\n');
@@ -27,10 +30,14 @@ router.get('/getLetters', function(req, res, next) {
   }
 });
 
-/* POST mail. */
+/* POST mail.
+@params letters A JSON array containing letter objects.
+@post mail from array is added to database.
+*/
 router.post('/addLetters', function(req, res, next) {
   let letters = database.getLetters();
-  let letter;
+  let newLetter;
+
   JSON.parse(req.query.letters).forEach(function (letter) {
     if(newLetter = database.letter(letter)) {
       letters.push(newLetter);
@@ -40,6 +47,14 @@ router.post('/addLetters', function(req, res, next) {
   });
   database.putLetters(letters);
   res.sendStatus(200);
+});
+
+/* GET peers.
+@return list of peers from the database.
+*/
+router.get('/getPeers', function(req, res, next) {
+    let peers = database.getPeers();
+    res.json(peers);
 });
 
 module.exports = router;
