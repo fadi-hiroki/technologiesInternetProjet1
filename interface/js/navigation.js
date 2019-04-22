@@ -144,3 +144,11 @@ function myFunction() {
     }       
   }
 }
+
+function mail(sender, content) {
+    return ({sender: sender, content: content});
+  }
+  
+function contact(key, name){
+	return ({key: key, name: name});
+}
