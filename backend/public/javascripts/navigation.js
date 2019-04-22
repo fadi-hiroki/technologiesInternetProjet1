@@ -50,6 +50,9 @@ $(document).ready(function(){
 		var encrypt=new JSEncrypt();
 		encrypt.setPublicKey(key);
 		var encrypted=encrypt.encrypt(document.getElementById("compose-textarea").value)
+		var decrypt=new JSEncrypt();
+		decrypt.setPrivateKey(prikey);
+		var decrypted=decrypt.decrypt(encrypted);
 		var params={dest:key,msg:encrypted};
 		$.post("/addLetters", params, function(data, status){
 			resetCompose();
@@ -82,10 +85,11 @@ $(document).ready(function(){
 		refreshMessages();
 	})
 	$("#Decrypt").click(function(){
-		var key=document.getElementById("privkey").value;
-		var Decrypt=new JSEncrypt();
-		Decrypt.setPrivateKey(key);
-		var decrypted=encrypt.encrypt(document.getElementById("ReadContent").value)
+		var key=$("#privkey").val();
+		var decrypt=new JSEncrypt();
+		decrypt.setPrivateKey(key);
+		var text=$("#ReadContent").text();
+		var decrypted=decrypt.decrypt(text);
 		$("#ReadContent").text(decrypted);
 		$("#privkey").text('');
 	})
