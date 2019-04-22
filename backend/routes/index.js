@@ -1,4 +1,5 @@
 var express = require('express');
+var path = require('path');
 var router = express.Router();
 
 const validations = require("../public/javascripts/validations.js");
@@ -7,11 +8,11 @@ const database = require("../public/javascripts/database.js");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Hello' });
+  res.sendFile(path.join(__dirname,'../../interface/mailbox.html'));
 });
 
 /* GET mail.
-@params pem A string representing a valid pem for witch one wishes to receive destined letters.
+@params pem A string representing a valid pem for which one wishes to receive destined letters.
 @return mail with pem as destinator.
 */
 router.get('/getLetters', function(req, res, next) {
