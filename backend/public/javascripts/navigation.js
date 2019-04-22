@@ -48,17 +48,11 @@ $(document).ready(function(){
 	$("#sendMessageButton").click(function(){
 		var key=document.getElementById("toCompose").value;
 		var encrypt=new JSEncrypt();
-		console.log(key);
 		encrypt.setPublicKey(key);
-		console.log(document.getElementById("compose-textarea").value)
 		var encrypted=encrypt.encrypt(document.getElementById("compose-textarea").value)
-		console.log(encrypted);
-		var prikey="-----BEGIN RSA PRIVATE KEY-----\nMIICWwIBAAKBgFj0MczehphhTLLrEJUMGwCY1AlBKHPP2iVoMW3xvt2ULDFwJa8G\nl7oT4Vsp7wPIAOb9D7yKUXpd/sYaFsDcywzQdo532NGzkXWkw8MI5pCySDOW1ETL\n9zauGj8k5wVrEjnRakk5kI1pO0CmHC1oB1ln6KhZ84szqLbAaxC224VDAgMBAAEC\ngYAbUpZhWRB6iZhndHBZd6hrnIW0egEU4Ykd6E0WeiSoJrUUUmAgzKOaEjUsLUsv\nHCW6zYwh21J/hZOWAblvb+ImJfpHjOygZth0zRcu5eid4Sv8s0s8oYtscCU1hDj4\nNZPoSyZF1G/MaP2U+dW1A6G5WTB5wZGsWEUjCFjjV5dT0QJBAKwA3uSaxDcb1lx+\nS1vUrI4/Ve8qV5/CRPJ6Cv2KApQTptyffKpUe1hWDnpTyyXkWhlvXuJkDPINxl93\nfgJ51+0CQQCEZNQiigJaPSll+rCPPb5FbpsthvrsQ2q0qUNE6Yg829t7gzAgkrc6\njrFtmVgkzReIvzHjdi/RAzRfRhZMKsvvAkEAnAXOKiAZjMO7lvsY8JviSsY49VG7\nWjemwyzhe0sNO7T3z3j8ZKVtnZuyVlRcGmshL6FOuJ15ALhuEXsa2rQboQJAc89/\ngXcX97forrxMFgD8n9/Q/lJEzMdsX/xwS6e89P+dTr3DK7srbJ3FtwmcgRSmsYgO\nK9sGmN8kwPKeLqKBIQJAAKp7zKKVUqhrzXCuWL9EYtnCrlLnfeZU2dLXEn7X8gXP\nZXnNdhk2yRjKWLYCqpQOywPD8aMldXU6MWeB73kBAQ==\n-----END RSA PRIVATE KEY-----";
-		console.log(prikey);
 		var decrypt=new JSEncrypt();
 		decrypt.setPrivateKey(prikey);
 		var decrypted=decrypt.decrypt(encrypted);
-		console.log(decrypted);
 		var params={dest:key,msg:encrypted};
 		$.post("/addLetters", params, function(data, status){
 			resetCompose();
