@@ -178,7 +178,6 @@
                 <tr>
                   <th>Cle</th>
                   <th>Sujet</th>
-                  <th>Date</th>
                 </tr>
                 </thead>
                 <tbody id="MessagesList">
@@ -187,13 +186,17 @@
                 <tr>
                   <th>Cle</th>
                   <th>Sujet</th>
-                  <th>Date</th>
                 </tr>
                 </tfoot>
               </table>
             </div>
             <!-- /.box-body -->
           </div>
+          <h5>Clé publique des courriels:</h5>
+          <form>
+            <textarea rows="6" cols="60" id="pubkey" style="resize:none"></textarea><br>
+            <button type="button" id="getLetters">Obtenir</button>
+          </form>
           <!-- /. box -->
         </div>
         <!-- /.col -->
@@ -236,9 +239,6 @@
             <div class="box-body">
               <div class="form-group">
                 <input class="form-control" id="toCompose" placeholder="To:">
-              </div>
-              <div class="form-group">
-                <input class="form-control" id="subjectCompose" placeholder="Subject:">
               </div>
               <div class="form-group">
                     <textarea id="compose-textarea" class="form-control" style="height: 200px">
@@ -371,6 +371,13 @@
               <button type="button" id="deleteEmail" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</button>
             </div>
             <!-- /.box-footer -->
+            <div class="box-footer">
+                <h4>Clé privée ici:</h4>
+                <form>
+                  <textarea rows="6" cols="60" id="privkey" style="resize:none"></textarea><br>
+                  <button type="button" class="btn btn-default" id="Decrypt">Decrypt</button>
+                </form>
+            </div>
           </div>
           <!-- /. box -->
         </div>
@@ -474,7 +481,7 @@
 <script src="javascripts/icheck.min.js"></script>
 <!-- Page Script -->
 
-
+<script src="/javascripts/jsencrypt.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="javascripts/demo.js"></script>
 <!--Section navigation scripts-->

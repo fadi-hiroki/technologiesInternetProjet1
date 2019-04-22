@@ -1,8 +1,7 @@
 //Jean-Marc Hebert et Mohamed LADJADJAT
 $(document).ready(function(){
-	refreshMessages();
+	var encrypt=new JSEncrypt();
 	$(".MailboxLink").click(function() {
-		refreshMessages();
 		$("#Read").css("display", "none");
 		$("#Compose").css("display", "none");
 		$("#Contacts").css("display", "none");
@@ -47,13 +46,17 @@ $(document).ready(function(){
 		$("#content-header").html("<h1>Ajouter Contact</h1>");
 	})
 	$("#sendMessageButton").click(function(){
-		var date=Date().toString().split(" ");
-		messages[messages.length]={"cle":document.getElementById("toCompose").value,"sujet":document.getElementById("subjectCompose").value,"contenu":document.getElementById("compose-textarea").value,"date":date[1]+" "+date[2]+" "+date[3]}
-		refreshMessages();
-		resetCompose();
-		$("#Compose").css("display", "none");
-		$("#content-header").html("<h1>Mailbox</h1>");
-		$("#Mailbox").css("display", "inline");
+		var key=document.getElementById("toCompose").value;
+		var encrypt=new JSEncrypt();
+		encrypt.setPublicKey(key);
+		var encrypted=encrypt.encrypt(document.getElementById("compose-textarea").value)
+		var params={dest:key,msg:encrypted};
+		$.post("/addLetters", params, function(data, status){
+			resetCompose();
+			$("#Compose").css("display", "none");
+			$("#content-header").html("<h1>Mailbox</h1>");
+			$("#Mailbox").css("display", "inline");
+		})
 	})
 	$("#addContactButton").click(function(){
 		contacts[contacts.length]={"cle":document.getElementById("cleContact").value,"nom":document.getElementById("nomContact").value,"prenom":document.getElementById("prenomContact").value}
@@ -75,11 +78,21 @@ $(document).ready(function(){
 		$("#Read").css("display", "none");
 		$("#Mailbox").css("display", "inline");
 	})
+	$("#getLetters").click(function(){
+		refreshMessages();
+	})
+	$("#Decrypt").click(function(){
+		var key=document.getElementById("privkey").value;
+		var Decrypt=new JSEncrypt();
+		Decrypt.setPrivateKey(key);
+		var decrypted=encrypt.encrypt(document.getElementById("ReadContent").value)
+		$("#ReadContent").text(decrypted);
+		$("#privkey").text('');
+	})
 })
 var lastMessage=0;
 
 function refreshContacts(){
-	var json="";
 	const Http = new XMLHttpRequest();
 	const url='/getPeers';
 	Http.open("GET", url);
@@ -87,9 +100,7 @@ function refreshContacts(){
 	Http.send();
 	Http.onreadystatechange=(e)=>{
 		if(Http.response!==null){
-			console.log("test");
 			contacts=readContacts(Http.response);
-			console.log(contacts);
 			$("#ContactsList").html("");
 			for(var i=0;i<contacts.length;i++){
 				$("#ContactsList").append("<tr><td>"+contacts[i].key+"</td><td>"+contacts[i].name+"</td></tr>");
@@ -99,25 +110,18 @@ function refreshContacts(){
 }
 
 function refreshMessages(){
-	const Http = new XMLHttpRequest();
-	const url='/getLetters';
-	Http.open("GET", url);
-	Http.responseType='json';
-	Http.send();
-	Http.onreadystatechange=(e)=>{
-		if(Http.response!==null){
-			messages=readMessages(Http.response);
+	var params={pem:document.getElementById("pubkey").value};
+	$.get("/getLetters", params, function(data, status){
+		messages=data;
+		$("#MessagesList").html("");
+		for(var i=0;i<messages.length;i++){
+			$("#MessagesList").append("<tr onclick=\"readMessage("+i+")\"><td>"+messages[i].dest+"</td><td>"+messages[i].msg+"</td></tr>");
 		}
-	}
-	//messages=readMessages(json);
-	$("#MessagesList").html("");
-	for(var i=0;i<messages.length;i++){
-		$("#MessagesList").append("<tr onclick=\"readMessage("+i+")\"><td>"+messages[i].cle+"</td><td>"+messages[i].sujet+"</td><td>"+messages[i].date+"</td></tr>");
-	}
+	})
 }
 
 function mail(sender, content) {
-    return ({sender: sender, content: content});
+    return ({dest: sender, msg: content});
   }
   
 function contact(key, name){
@@ -148,17 +152,13 @@ function readMessage(i){
 }
 
 function refreshRead(i){
-	console.log(i+1);
-	$("#subjectRead").text(messages[i].sujet);
-	$("#toRead").text(messages[i].cle);
-	$("#readTime").text(messages[i].date);
-	$("#ReadContent").text(messages[i].contenu)
+	$("#toRead").text(messages[i].dest);
+	$("#ReadContent").text(messages[i].msg)
 	lastMessage=i;
 }
 
 function resetCompose(){
 	document.getElementById("toCompose").value="";
-	document.getElementById("subjectCompose").value="";
 	document.getElementById("compose-textarea").value="";
 }
 

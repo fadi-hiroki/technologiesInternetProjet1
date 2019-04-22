@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
 */
 router.get('/getLetters', function(req, res, next) {
   let ret = [];
-  let pem = req.query.pem.replace(/\\n/g, '\n');
+  let pem = req.body.pem.replace(/\\n/g, '\n');
   if (!validations.validPEM(req.query.pem)){
     res.sendStatus(400);
   } else {
@@ -36,16 +36,15 @@ router.get('/getLetters', function(req, res, next) {
 @post mail from array is added to database.
 */
 router.post('/addLetters', function(req, res, next) {
+  letter=req.body;
   let letters = database.getLetters();
   let newLetter;
 
-  JSON.parse(req.query.letters).forEach(function (letter) {
-    if(newLetter = database.letter(letter)) {
-      letters.push(newLetter);
-    } else {
-      res.sendStatus(400);
-    }
-  });
+  if(newLetter = database.letter(letter)) {
+    letters.push(newLetter);
+  } else {
+    res.sendStatus(400);
+  }
   database.putLetters(letters);
   res.sendStatus(200);
 });
