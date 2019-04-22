@@ -1,4 +1,5 @@
 var express = require('express');
+var path = require('path');
 var router = express.Router();
 
 const validations = require("../public/javascripts/validations.js");
@@ -7,16 +8,16 @@ const database = require("../public/javascripts/database.js");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Hello' });
+  res.sendFile(path.join(__dirname,'../../interface/mailbox.html'));
 });
 
 /* GET mail.
-@params pem A string representing a valid pem for witch one wishes to receive destined letters.
+@params pem A string representing a valid pem for which one wishes to receive destined letters.
 @return mail with pem as destinator.
 */
 router.get('/getLetters', function(req, res, next) {
   let ret = [];
-  let pem = req.query.pem.replace(/\\n/g, '\n');
+  let pem = req.body.pem.replace(/\\n/g, '\n');
   if (!validations.validPEM(req.query.pem)){
     res.sendStatus(400);
   } else {
@@ -35,16 +36,15 @@ router.get('/getLetters', function(req, res, next) {
 @post mail from array is added to database.
 */
 router.post('/addLetters', function(req, res, next) {
+  letter=req.body;
   let letters = database.getLetters();
   let newLetter;
 
-  JSON.parse(req.query.letters).forEach(function (letter) {
-    if(newLetter = database.letter(letter)) {
-      letters.push(newLetter);
-    } else {
-      res.sendStatus(400);
-    }
-  });
+  if(newLetter = database.letter(letter)) {
+    letters.push(newLetter);
+  } else {
+    res.sendStatus(400);
+  }
   database.putLetters(letters);
   res.sendStatus(200);
 });
